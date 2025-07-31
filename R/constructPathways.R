@@ -365,6 +365,7 @@ doSplitEventCohorts <- function(
 #'
 #' @return (`invisible(NULL)`)
 doEraCollapse <- function(andromeda, eraCollapseSize) {
+  browser()
   andromeda$treatmentHistory <- andromeda$treatmentHistory %>%
     dplyr::group_by(.data$eventCohortId, .data$personId) %>%
     dbplyr::window_order(.data$eventStartDate, .data$eventEndDate) %>%
@@ -418,6 +419,7 @@ doEraCollapse <- function(andromeda, eraCollapseSize) {
     andromeda = andromeda
   )
   return(invisible(NULL))
+browser()
 }
 
 
@@ -440,6 +442,9 @@ doCombinationWindow <- function(
     andromeda,
     combinationWindow,
     minPostCombinationDuration) {
+  
+  browser()
+  
   # Find which rows contain some overlap
   selectRowsCombinationWindow(andromeda)
   
