@@ -365,7 +365,6 @@ doSplitEventCohorts <- function(
 #'
 #' @return (`invisible(NULL)`)
 doEraCollapse <- function(andromeda, eraCollapseSize) {
-  browser()
   andromeda$treatmentHistory <- andromeda$treatmentHistory %>%
     dplyr::group_by(.data$eventCohortId, .data$personId) %>%
     dbplyr::window_order(.data$eventStartDate, .data$eventEndDate) %>%
@@ -405,8 +404,7 @@ doEraCollapse <- function(andromeda, eraCollapseSize) {
   }
 
   andromeda$treatmentHistory <- andromeda$treatmentHistory %>%
-    dplyr::filter(!.data$row %in% rows) %>%
-    dplyr::select(-"nextStart", -"nextEnd", -"gap", -"row", -"row_person")
+    dplyr::filter(!.data$row %in% rows)
 
   attrCounts <- fetchAttritionCounts(andromeda, "treatmentHistory")
   appendAttrition(
@@ -419,7 +417,6 @@ doEraCollapse <- function(andromeda, eraCollapseSize) {
     andromeda = andromeda
   )
   return(invisible(NULL))
-browser()
 }
 
 
