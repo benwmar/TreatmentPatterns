@@ -404,7 +404,9 @@ doEraCollapse <- function(andromeda, eraCollapseSize) {
   }
 
   andromeda$treatmentHistory <- andromeda$treatmentHistory %>%
-    dplyr::filter(!.data$row %in% rows)
+     dplyr::ungroup() %>%
+     dplyr::filter(!.data$row %in% rows) %>%
+     dplyr::select(-"nextStart", -"nextEnd", -"gap", -"row", -"row_person")
 
   attrCounts <- fetchAttritionCounts(andromeda, "treatmentHistory")
   appendAttrition(
